@@ -1,0 +1,313 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Roboto, sans-serif;
+  background: #eceffc;
+}
+/*just bg and body style*/
+.container {
+  background-color: #1e2832;
+  padding-bottom: 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.center {
+  text-align: center;
+}
+#top {
+  margin-top: 20px;
+}
+.btn-container {
+  background: #fff;
+  border-radius: 5px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.white {
+  color: white;
+}
+.imgupload {
+  color: #1e2832;
+  padding-top: 40px;
+  font-size: 7em;
+}
+#namefile {
+  color: black;
+}
+h4 > strong {
+  color: #ff3f3f;
+}
+.btn-primary {
+  border-color: #ff3f3f !important;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ff3f3f !important;
+  border-color: #ff3f3f !important;
+}
+
+/*these two are set to not display at start*/
+.imgupload.ok {
+  display: none;
+  color: green;
+}
+.imgupload.stop {
+  display: none;
+  color: red;
+}
+
+/*this sets the actual file input to overlay our button*/
+#fileup {
+  opacity: 0;
+  -moz-opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  width: 200px;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
+  height: 50px;
+}
+
+/*switch between input and not active input*/
+#submitbtn {
+  padding: 5px 50px;
+  display: none;
+}
+#fakebtn {
+  padding: 5px 40px;
+}
+
+/*www.emilianocostanzo.com*/
+#sign {
+  color: #1e2832;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  text-shadow: 0px 0px 0px #1e2832;
+  transition: all.3s;
+}
+#sign:hover {
+  color: #1e2832;
+  text-shadow: 0px 0px 5px #1e2832;
+}
+
+.upload {
+  --btn-color: #3bafda;
+  --progress-color: #2d334c;
+  --ease-in-out-quartic: cubic-bezier(0.77, 0, 0.175, 1);
+
+  position: relative;
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1.7px 1.4px rgba(0, 0, 0, 0.02),
+    0 4px 3.3px rgba(0, 0, 0, 0.028), 0 7.5px 6.3px rgba(0, 0, 0, 0.035),
+    0 13.4px 11.2px rgba(0, 0, 0, 0.042), 0 25.1px 20.9px rgba(0, 0, 0, 0.05),
+    0 60px 50px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transform: rotate(0);
+
+  &__info {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    margin-right: 40px;
+  }
+
+  &__filename {
+    padding-left: 8px;
+  }
+
+  &__button {
+    position: relative;
+    padding: 16px;
+    margin: 0;
+    font-size: 100%;
+    font-family: inherit;
+    color: white;
+    background: none;
+    border: none;
+    border-radius: inherit;
+    outline: none;
+    cursor: pointer;
+    transform: scale(0.9);
+
+    &::before {
+      position: absolute;
+      content: "";
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--btn-color);
+      border-radius: inherit;
+      transform-origin: right;
+    }
+  }
+
+  &__hint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    transform: translateY(100%);
+  }
+
+  &__progress {
+    position: absolute;
+    content: "";
+    top: 90%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background: var(--progress-color);
+    transform: scaleX(0);
+    transform-origin: left;
+
+    .check {
+      stroke-dasharray: 16px;
+      stroke-dashoffset: 16px;
+      margin-right: 6px;
+    }
+  }
+
+  &.uploading {
+    .upload__button {
+      animation: expand 0.3s forwards;
+
+      &::before {
+        animation: fill-left 1.2s 0.4s var(--ease-in-out-quartic) forwards;
+      }
+    }
+
+    .upload__info > *,
+    .upload__button__text {
+      animation: fade-up-out 0.4s 0.4s forwards;
+    }
+
+    .upload__hint {
+      animation: fade-up-in 0.4s 0.8s forwards;
+    }
+
+    .upload__progress {
+      animation: fill-right 2s 1s var(--ease-in-out-quartic) forwards;
+    }
+  }
+
+  &.uploaded {
+    .upload__progress {
+      animation: slide-up 1s var(--ease-in-out-quartic) forwards;
+
+      .check {
+        animation: stroke-in 0.6s 0.4s var(--ease-in-out-quartic) forwards;
+      }
+    }
+  }
+
+  &.uploaded-after {
+    .upload__info {
+      animation: slide-down-info 1s var(--ease-in-out-quartic) forwards;
+    }
+
+    .upload__button {
+      animation: slide-down-button 1s var(--ease-in-out-quartic) forwards;
+    }
+
+    .upload__progress {
+      animation: slide-down-progress 1s var(--ease-in-out-quartic) forwards;
+    }
+  }
+}
+
+@keyframes expand {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fill-left {
+  to {
+    transform: scale(4, 1.2);
+  }
+}
+
+@keyframes fade-up-out {
+  to {
+    opacity: 0;
+    transform: translateY(-40%);
+  }
+}
+
+@keyframes fade-up-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fill-right {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: scaleX(1) translateY(0);
+  }
+
+  to {
+    transform: scaleX(1) translateY(-90%);
+  }
+}
+
+@keyframes stroke-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes slide-down-info {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down-button {
+  from {
+    transform: scale(0.9) translateY(-100%);
+  }
+
+  to {
+    transform: scale(0.9) translateY(0);
+  }
+}
+
+@keyframes slide-down-progress {
+  from {
+    transform: scaleX(1) translateY(-90%);
+  }
+
+  to {
+    transform: scaleX(1) translateY(10%);
+  }
+}
